@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container" id="login-sect">
+        <h2>Login</h2>		
+        <p>Please fill in your credentials to login.</p>		
+        <form action="" method="post">
+            {{ form.hidden_tag()}}		
+            <div class="form-group">  
+                {{ form.username(class="form-control", style="background-color: #E8F0FE") }}<br>
+                {% for error in form.username.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>        
+            <div class="form-group">
+                {{ form.password(class="form-control", style="background-color: #E8F0FE") }}<br>
+                {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.remember_me() }} {{ form.remember_me.label }}<br/>
+                <p>
+                    {{ form.submit(class="btn btn-lg", style="background-color: #ffb701") }}
+                    <span>
+                        <input type="reset" name="reset" class="btn btn-default btn-lg" value="Reset">
+                    <span>
+                </p>
+            </div>
+            <p>Don't have an account? <a href="/registration">Sign up now</a>.</p>
+        </form>                                                         
+    </div><!-- end /.container-->
+{% endblock %}

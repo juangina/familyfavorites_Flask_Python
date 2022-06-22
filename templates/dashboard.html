@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="contactusform" id="favorite-form-sect">
+    <div class="row contact-info">
+    <!--Contact Details Column-->
+      <div class="col-md-6 contact-details" align="center">
+        <!--Favorite Options Weekly Display-->
+          <div>
+            <h4 class="contact-heading" style="margin-top: 20px">Favorite Topic</h4>
+              <p class="info"><strong>{{ topicObject[1] }}</strong> - {{ topicObject[2] }}
+              </p>
+          </div><!--end contact-info-->
+          <hr>
+        <!--end Favorite Options Weekly Display-->
+
+        <!--Random Image API Request-->
+          <div class="stock_photo">
+                <img style="padding-bottom: 25px" class="img-responsive" src= 
+                  {{imageObject['photos'][0]['src']['medium']}}
+                alt='photo'>       
+            <span>
+              <a href="https://www.pexels.com"><img src="https://images.pexels.com/lib/api/pexels.png" alt="Pexels Logo" style="width:150px"/></a>
+              </span>
+              This <a href={{imageObject['photos'][0]['url']}}>Photo</a> was taken by <a href={{imageObject['photos'][0]['photographer_url']}}>{{imageObject['photos'][0]['photographer']}}</a> on Pexels.
+            </span>
+          </div>
+          <hr>
+        <!--Random Image API Request-->
+
+        <!--Random Quote API Request-->  
+          <div style="margin-top: 20px">
+            <h4 class="contact-heading"><strong>Interesting Quote</strong></h4>
+            <blockquote class="blockquote-reverse">
+              <p style='font-style: italic'>{{quoteObject['quoteText']}}</p>
+              <footer>{{quoteObject['quoteAuthor']}}</footer>                        
+            </blockquote>
+          </div>
+        <!--end Random Quote API Request-->
+      </div>
+
+    <!--Contact Details Column-->
+    <!--Email Form Column-->
+      <div class="col-md-6 emailForm" align="center">
+        <h4 style="margin-top: 20px"> Enter your Favorite for the Week!</h4>
+        <form method="post" action="">
+          <div class="form-group">
+            <label for="sel1">Select Topic from Dropdown List</label>
+            <select class="form-control" id="sel1" name="topic">
+              {% for topic in topicsObject %}
+                <option value={{topic[1]}}>{{topic[1]}}</option>
+              {% endfor %}
+            </select>
+            <!--input type="text" name="topic" class="form-control" placeholder="Topic for the Week" value="<?php echo $_POST['topic']; ?>" -->
+          </div><!--end form-group-->
+          <div class="form-group">
+            <input type="text" name="favorite" class="form-control" placeholder="Your Favorite"/>
+          </div><!--end form-group-->
+          <div class="form-group">
+            <textarea class="form-control" id="message" name="comment" placeholder="Comment"></textarea>
+          </div><!--end form-group-->
+          <div class="form-group">
+            <input type="submit" name="submit" class="btn btn-lg" style="background-color: #ffb701" value="Submit Favorite" />
+          </div><!--end form-group-->
+        </form>
+      </div>
+    <!--end Email Form Column-->  
+    </div><!--end row contact info-->
+  </div><!--end contactusform-->
+
+  <div class="container-fluid" id="favorite-list-sect">
+    <h2 class="text-center text-capitalize">Sample Favorites from Family</h2>
+    <div class="row">
+    <!--Display Favorites-->
+    {% for i in range(3) %}
+      <div class="col-sm-4">
+          <table class="table table-bordered" style="border-style: solid; border-width: 5px; background-color: #ffb701;">
+              <thead>
+              <tr>
+                  <th style="width:30%">Name</th>
+                  <th style="width:70%">Content</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                  <td>User Name</td>
+                  <td>{{ favoritesObject[randArray[i]][1] }}</td>
+              </tr>
+              <tr>
+                  <td>Topic</td>
+                  <td>{{ favoritesObject[randArray[i]][2] }}</td>
+              </tr>
+              <tr>
+                  <td>Favorite</td>
+                  <td>{{ favoritesObject[randArray[i]][3] }}</td>        
+              </tr>
+              <tr>
+                  <td>Comments</td>
+                  <td>{{ favoritesObject[randArray[i]][4] }}</td>        
+              </tr>
+              </tbody>
+          </table>
+      </div><!--end col-md-2-->
+      {% endfor %}
+      
+      
+
+    <!--end Display Favorites-->
+    </div><!--- /.row--> 
+  </div><!--- /.container-->
+
+{% endblock %}
